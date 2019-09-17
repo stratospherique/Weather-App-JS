@@ -1,5 +1,129 @@
 @import 'reset.css';
 
-h1 {
-  color: red;
+main {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.container {
+  width: 60%;
+  max-width: 900px;
+  min-width: 250px;
+  height: 30rem;
+  border: 1px solid;
+
+  background-size: 100% 70%;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+}
+
+#search-form {
+  border: 1px solid;
+  width: 80%;
+  margin: 0 auto;
+  padding: .5rem;
+  display: flex;
+  flex-direction: column;
+
+
+  &>div {
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+
+    .select {
+      width: 40%;
+      margin: 0 .2rem;
+      position: relative;
+
+      & input {
+        width: 100%;
+
+      }
+
+      .show {
+        transform: scale(1);
+      }
+
+      ul {
+        position: absolute;
+        top: 1.3rem;
+        width: 100%;
+        max-height: 10rem;
+        border: 1px solid green;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        transform: scale(0);
+        z-index: 1000;
+
+        &>li {
+          width: 100%;
+          padding: .5rem;
+          background-color: aqua;
+        }
+      }
+    }
+
+
+  }
+
+  & button {
+    width: 15%;
+    align-self: flex-end;
+  }
+}
+
+.weather {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(218, 199, 199);
+
+  position: relative;
+
+  .conversion {
+    width: 4rem;
+    height: 1rem;
+    display: flex;
+    align-items: stretch;
+    border: 1px solid;
+    position: absolute;
+    top: 0;
+
+    & input {
+      display: none;
+    }
+
+    .slider {
+      width: 50%;
+      background-color: black;
+      transition: transform .5s ease-in;
+    }
+
+    .right {
+      transform: translateX(100%);
+    }
+
+    & span {
+      position: absolute;
+      color: rgb(233, 36, 10);
+      font-weight: 900;
+      z-index: 1000;
+    }
+
+    .f {
+      right: 15%;
+    }
+
+    .c {
+      left: 10%;
+    }
+
+  }
 }
