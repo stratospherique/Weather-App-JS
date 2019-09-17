@@ -1,6 +1,6 @@
 const DOMController = () => {
   const backgroundImg = document.querySelector('.container');
-  const display = document.querySelector('.weather')
+  const display = document.querySelector('.weather');
   const selectList = document.querySelector('#cities-list');
   const selectList2 = document.querySelector('#countries-list');
   const [countriesInput, citiesInput] = document.querySelectorAll('input');
@@ -11,8 +11,25 @@ const DOMController = () => {
   const conversionCheckbox = document.querySelector('#system');
   const temperature = () => document.querySelector('.temp');
 
+  const tempToggler = () => {
+    conversionSlider.classList.toggle('right');
+    conversionCheckbox.checked = !conversionCheckbox.checked;
+    if (temperature()) {
+      let temp = parseFloat(temperature().innerText.match(/\d+/)[0]);
+      if (conversionCheckbox.checked) {
+        temp = Math.round(((temp * 9) / 5) + 32);
+        temperature().innerText = `${temp} °F`;
+      } else {
+        temp = Math.round((temp - 32) * (5 / 9));
+        temperature().innerText = `${temp} °C`;
+      }
+    } else {
+      console.error('no temp');
+    }
+  };
+
   const setWeatherLooks = async (url, giphy, info) => {
-    let promise = Promise.resolve(url);
+    const promise = Promise.resolve(url);
     const skyImage = new Image();
     skyImage.src = await promise;
     if (document.querySelector('img')) {
@@ -31,7 +48,6 @@ const DOMController = () => {
       info[1] = `<span class="temp">${temp} °C</span>`;
       infoPanel.innerHTML = `${info.join(', ')}`;
     }
-
   };
 
   const handleCountryInput = async (nations) => {
@@ -43,16 +59,12 @@ const DOMController = () => {
       return;
     }
     const regex = new RegExp(`^(${countriesInput.value})`, 'i');
-    let promise = Promise.resolve(nations.filter((item) => item[1].match(regex)));
-    let nationsHtml = await promise
+    const promise = Promise.resolve(nations.filter((item) => item[1].match(regex)));
+    const nationsHtml = await promise
       .then((data) => {
         nations = data;
         return data
-          .map((item) => {
-            return `
-        <li name="city" data-code="${item[0]}">${item[1]}</li>
-        `;
-          })
+          .map((item) => `<li name="city" data-code="${item[0]}">${item[1]}</li>`)
           .join('');
       })
       .catch((err) => console.error(err));
@@ -81,17 +93,13 @@ const DOMController = () => {
     }
 
     const regex = new RegExp(`^(${citiesInput.value})`, 'i');
-    let promise = Promise.resolve(cities.filter((item) => item[0].match(regex)));
+    const promise = Promise.resolve(cities.filter((item) => item[0].match(regex)));
 
     const citiesHtml = await promise
       .then((data) => {
-        return data
-          .map((city) => {
-            return `
-          <li data-search="${[ city[0].replace(/\s/g, '%20'), city[1].toLowerCase() ].join(',')}">${city[0]}</li>
-        `;
-          })
+        const temp = data.map((city) => `<li data-search="${[city[0].replace(/\s/g, '%20'), city[1].toLowerCase()].join(',')}">${city[0]}</li>`)
           .join('');
+        return temp;
       })
       .catch((err) => console.error(err));
     selectList.innerHTML = await citiesHtml;
@@ -107,9 +115,7 @@ const DOMController = () => {
 
   const setPage = async (cities, countries, getWeather) => {
     const citiesCodes = [...new Set(cities.map((e) => e[1]))];
-    let nations = citiesCodes.map((item) => {
-      return [item, countries.countries[item]['name']];
-    });
+    const nations = citiesCodes.map((item) => [item, countries.countries[item].name]);
     let listOfCities = [];
     countriesInput.addEventListener('change', function () {
       listOfCities = cities.filter((city) => city[1] === this.dataset.code);
@@ -120,7 +126,7 @@ const DOMController = () => {
     citiesInput.addEventListener('change', () => handleCityInput(listOfCities));
     searchBtn.addEventListener('click', () => {
       if (!citiesInput.dataset.search) {
-        alert('Please enter city info')
+        alert('Please enter city info');
         return;
       }
       getWeather(citiesInput.dataset.search);
@@ -134,30 +140,14 @@ const DOMController = () => {
     conversionPanel.addEventListener('mousedown', tempToggler);
   };
 
-  const tempToggler = () => {
-    conversionSlider.classList.toggle('right');
-    conversionCheckbox.checked = !conversionCheckbox.checked;
-    if (temperature()) {
-      let temp = parseFloat(temperature().innerText.match(/\d+/)[0]);
-      if (conversionCheckbox.checked) {
-        temp = Math.round((temp * 9 / 5) + 32);
-        temperature().innerText = `${temp} °F`;
-      } else {
-        temp = Math.round((temp - 32) * 5 / 9);
-        temperature().innerText = `${temp} °C`;
-      }
-    } else {
-      console.error('no temp');
-    }
-  }
 
   return {
     setWeatherLooks,
-    setPage
+    setPage,
   };
 };
 
 export {
   DOMController as
-  default
+  default,
 };
