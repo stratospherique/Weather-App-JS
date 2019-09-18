@@ -28,7 +28,7 @@ const DOMController = () => {
     }
   };
 
-  const setWeatherLooks = async (url, giphy, info) => {
+  const setWeatherLooks = async (url, giphy, info) {
     const promise = Promise.resolve(url);
     const skyImage = new Image();
     skyImage.src = await promise;
