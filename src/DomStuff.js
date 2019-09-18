@@ -28,17 +28,15 @@ const DOMController = () => {
     }
   };
 
-  const setWeatherLooks = async (url, giphy, info) {
-    const promise = Promise.resolve(url);
+  const setWeatherLooks = (url, giphy, info) => {
     const skyImage = new Image();
-    skyImage.src = await promise;
+    skyImage.src = url;
     if (document.querySelector('img')) {
       display.removeChild(document.querySelector('img'));
     }
     display.insertBefore(skyImage, document.querySelector('.info'));
     backgroundImg.style['background-image'] = `url(${giphy})`;
     let temp = parseFloat(info[1]);
-    console.log(conversionCheckbox.checked);
     if (conversionCheckbox.checked) {
       temp = Math.round((temp - 273.15) * (5 / 9) + 32);
       info[1] = `<span class="temp">${temp} °F</span>`;
