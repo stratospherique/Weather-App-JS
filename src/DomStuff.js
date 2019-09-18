@@ -28,7 +28,7 @@ const DOMController = () => {
     }
   };
 
-  const setWeatherLooks = (url, giphy, info) => {
+  const setWeatherLooks = async (url, giphy, info) => {
     const promise = Promise.resolve(url);
     const skyImage = new Image();
     skyImage.src = await promise;
@@ -71,9 +71,9 @@ const DOMController = () => {
     selectList2.innerHTML = await nationsHtml;
     selectList2.classList.value = 'show';
     selectList2.querySelectorAll('li').forEach((li) => {
-      li.addEventListener('mousedown', function () {
-        countriesInput.value = this.innerText;
-        countriesInput.dataset.code = this.dataset.code;
+      li.addEventListener('mousedown', () => {
+        countriesInput.value = li.innerText;
+        countriesInput.dataset.code = li.dataset.code;
         selectList2.classList.remove('show');
       });
     });
@@ -105,9 +105,9 @@ const DOMController = () => {
     selectList.innerHTML = await citiesHtml;
     selectList.classList.value = 'show';
     selectList.querySelectorAll('li').forEach((li) => {
-      li.addEventListener('mousedown', function () {
-        citiesInput.value = this.innerText;
-        citiesInput.dataset.search = this.dataset.search;
+      li.addEventListener('mousedown', () => {
+        citiesInput.value = li.innerText;
+        citiesInput.dataset.search = li.dataset.search;
         selectList.classList.remove('show');
       });
     });
@@ -117,8 +117,8 @@ const DOMController = () => {
     const citiesCodes = [...new Set(cities.map((e) => e[1]))];
     const nations = citiesCodes.map((item) => [item, countries.countries[item].name]);
     let listOfCities = [];
-    countriesInput.addEventListener('change', function () {
-      listOfCities = cities.filter((city) => city[1] === this.dataset.code);
+    countriesInput.addEventListener('change', () => {
+      listOfCities = cities.filter((city) => city[1] === countriesInput.dataset.code);
     });
     countriesInput.addEventListener('input', () => handleCountryInput(nations));
     countriesInput.addEventListener('change', () => handleCountryInput(nations));
