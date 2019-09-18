@@ -2,8 +2,8 @@ import _ from 'lodash';
 import './css/main.scss';
 import cities from 'cities.json';
 import nations from 'countries-list';
-import DOMController from 'DomStuff';
-import weatherConditionGifs from 'data';
+import DOMController from './DomStuff';
+import weatherConditionGifs from './data';
 
 
 const getWeather = (cityID) => {
