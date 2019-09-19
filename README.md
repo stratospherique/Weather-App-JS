@@ -11,7 +11,7 @@
   - [link to the assignment](https://www.theodinproject.com/courses/javascript/lessons/weather-app)
 
 ### Live preview
-- Check out a live version of the page [live](http://raw.githack.com/stratospherique/Weather-App-JS/development/dist/index.html)
+- Check out a live version of the page [live](https://raw.githack.com/stratospherique/Weather-App-JS/gh-pages/index.html)
 
 ### Contributors (for more Info)
 
