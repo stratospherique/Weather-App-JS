@@ -48,7 +48,7 @@ const DOMController = () => {
     }
   };
 
-  const handleCountryInput = (nations) => {
+  const handleCountryInput = async (nations) => {
     if (countriesInput.value === '') {
       selectList2.classList.remove('show');
       citiesInput.setAttribute('disabled', true);
@@ -57,9 +57,16 @@ const DOMController = () => {
       return;
     }
     const regex = new RegExp(`^(${countriesInput.value})`, 'i');
-    const filteredNations = nations.filter((item) => item[1].match(regex));
-    const nationsHtml = filteredNations.map((item) => `<li name="city" data-code="${item[0]}">${item[1]}</li>`).join('');
-    selectList2.innerHTML = nationsHtml;
+    const promise = Promise.resolve(nations.filter((item) => item[1].match(regex)));
+    const nationsHtml = await promise
+      .then((data) => {
+        nations = data;
+        return data
+          .map((item) => `<li name="city" data-code="${item[0]}">${item[1]}</li>`)
+          .join('');
+      })
+      .catch((err) => console.error(err));
+    selectList2.innerHTML = await nationsHtml;
     selectList2.classList.value = 'show';
     selectList2.querySelectorAll('li').forEach((li) => {
       li.addEventListener('mousedown', () => {
