@@ -23,9 +23,11 @@ const DOMController = () => {
         temp = Math.round((temp - 32) * (5 / 9));
         temperature().innerText = `${temp} °C`;
       }
-    } else {
-      console.error('no temp');
     }
+  };
+
+  const fetchingError = (err) => {
+    infoPanel.innerHTML = `<span style="color: red;">${err}</span>`;
   };
 
   const setWeatherLooks = (url, giphy, info) => {
@@ -46,6 +48,7 @@ const DOMController = () => {
       info[1] = `<span class="temp">${temp} °C</span>`;
       infoPanel.innerHTML = `${info.join(', ')}`;
     }
+    conversionPanel.classList.remove('hide');
   };
 
   const handleCountryInput = async (nations) => {
@@ -142,6 +145,7 @@ const DOMController = () => {
   return {
     setWeatherLooks,
     setPage,
+    fetchingError,
   };
 };
 
