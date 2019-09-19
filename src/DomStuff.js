@@ -27,6 +27,9 @@ const DOMController = () => {
   };
 
   const fetchingError = (err) => {
+    display.querySelector('img').remove();
+    backgroundImg.style['background-image'] = 'none';
+    conversionPanel.classList.add('hide');
     infoPanel.innerHTML = `<span style="color: red;">${err}</span>`;
   };
 
