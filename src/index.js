@@ -1,20 +1,11 @@
 import _ from 'lodash';
-import './css/main.scss';
 import cities from 'cities.json';
 import nations from 'countries-list';
 import DOMController from './DomStuff';
 import weatherConditionGifs from './data';
+import ApiFetcher from './api-fetching';
+import './css/main.scss';
 
-
-const weatherCondition = async (city) => {
-  const apiKey = '612ba83bcef55aa96b88795e503e2ec8';
-  return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}`, {
-    mode: 'cors',
-  })
-    .then((response) => response.json())
-    .then((data) => Promise.resolve(data))
-    .catch((err) => Promise.reject(err));
-};
 
 const giphyExpression = async (data) => {
   const source = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
@@ -28,7 +19,7 @@ const giphyExpression = async (data) => {
 };
 
 const getWeather = async (cityID) => {
-  await weatherCondition(cityID).then((data) => {
+  await ApiFetcher.weatherCondition(cityID).then((data) => {
     giphyExpression(data).catch((err) => {
       DOMController().fetchingError('Unavailabe city info &#128148');
     });
