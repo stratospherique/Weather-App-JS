@@ -3,13 +3,15 @@ const DOMController = () => {
   const display = document.querySelector('.weather');
   const selectList = document.querySelector('#cities-list');
   const selectList2 = document.querySelector('#countries-list');
+  const cityInputDiv = document.querySelector('.two');
   const [countriesInput, citiesInput] = document.querySelectorAll('input');
   const searchBtn = document.querySelector('.started');
   const infoPanel = document.querySelector('.info');
+  const cityName = document.querySelector('.city_name');
   const conversionPanel = document.querySelector('.conversion');
   const conversionSlider = document.querySelector('.slider');
   const conversionCheckbox = document.querySelector('#system');
-  const temperature = () => document.querySelector('.temp');
+  const temperature = () => document.querySelector('.temperature');
 
   const tempToggler = () => {
     conversionSlider.classList.toggle('right');
@@ -33,15 +35,31 @@ const DOMController = () => {
     infoPanel.innerHTML = `<span style="color: red;">${err}</span>`;
   };
 
-  const setWeatherLooks = (url, giphy, info) => {
-    const skyImage = new Image();
-    skyImage.src = url;
-    if (document.querySelector('img')) {
-      display.removeChild(document.querySelector('img'));
-    }
-    display.insertBefore(skyImage, document.querySelector('.info'));
+  const setWeatherLooks = (url, giphy, info, card) => {
+    const displayDiv = url.map((link, ind) => {
+      let skyImage = `<img src="${link}" />`;
+      let theData = `<span class="${info[ind].className}">${info[ind].value} ${info[ind].unity}</span>`;
+      return `<div class="list">${skyImage}${theData}</div>`;
+    }).join('');
+    /*    const skyImage = new Image();
+        skyImage.src = url;
+        const temDiv = `<div class="list">${skyImage}</div>`;
+    
+        /*    if (document.querySelector('img')) {
+            display.removeChild(document.querySelector('img'));
+          }*/
+    //display.insertBefore(skyImage, document.querySelector('.info'));
+    cityName.innerText = `${card.name}, ${card.country}`;
+    infoPanel.innerHTML = displayDiv;
+    display.classList.remove('show-weather');
+    setTimeout(() => {
+      display.classList.add('show-weather');
+    }, 1000);
+    conversionSlider.classList.add('right');
+    conversionCheckbox.checked = true;
+    //infoPanel.insertAdjacentElement('afterbegin', temDiv);
     backgroundImg.style['background-image'] = `url(${giphy})`;
-    let temp = parseFloat(info[1]);
+    /*let temp = parseFloat(info[0].value);
     if (conversionCheckbox.checked) {
       temp = Math.round((temp - 273.15) * (5 / 9) + 32);
       info[1] = `<span class="temp">${temp} °F</span>`;
@@ -51,7 +69,7 @@ const DOMController = () => {
       info[1] = `<span class="temp">${temp} °C</span>`;
       infoPanel.innerHTML = `${info.join(', ')}`;
     }
-    conversionPanel.classList.remove('hide');
+    conversionPanel.classList.remove('hide');*/
   };
 
   const handleCountryInput = async (nations) => {
@@ -79,14 +97,20 @@ const DOMController = () => {
         countriesInput.value = li.innerText;
         countriesInput.dataset.code = li.dataset.code;
         selectList2.classList.remove('show');
+        citiesInput.removeAttribute('disabled');
+        setTimeout(() => {
+          cityInputDiv.classList.add('show-input');
+        }, 1000)
       });
     });
 
-    if (nations.length === 1) {
+    /*if (nations) {
       citiesInput.removeAttribute('disabled');
+      cityInputDiv.classList.add('show-input');
     } else {
       citiesInput.setAttribute('disabled', true);
-    }
+      cityInputDiv.classList.remove('show-input');
+    }*/
   };
 
   const handleCityInput = async (cities) => {
@@ -121,28 +145,33 @@ const DOMController = () => {
     const citiesCodes = [...new Set(cities.map((e) => e[1]))];
     const nations = citiesCodes.map((item) => [item, countries.countries[item].name]);
     let listOfCities = [];
+    countriesInput.value = '';
     countriesInput.addEventListener('change', () => {
       listOfCities = cities.filter((city) => city[1] === countriesInput.dataset.code);
     });
     countriesInput.addEventListener('input', () => handleCountryInput(nations));
-    countriesInput.addEventListener('change', () => handleCountryInput(nations));
+    //countriesInput.addEventListener('change', () => handleCountryInput(nations));
     citiesInput.addEventListener('input', () => handleCityInput(listOfCities));
-    citiesInput.addEventListener('change', () => handleCityInput(listOfCities));
-    searchBtn.addEventListener('click', () => {
-      if (!citiesInput.dataset.search) {
-        alert('Please enter city info');
-        return;
-      }
-      getWeather(citiesInput.dataset.search);
-      citiesInput.removeAttribute('data-search');
-      citiesInput.value = '';
-      citiesInput.setAttribute('disabled', true);
-      countriesInput.removeAttribute('data-code');
-      countriesInput.value = '';
-    });
+    //citiesInput.addEventListener('change', () => handleCityInput(listOfCities));
+    searchBtn.addEventListener('mousedown', () => handleSearchBtnClick(getWeather))
+    //searchBtn.onclick = handleSearchBtnClick;
     conversionCheckbox.checked = false;
     conversionPanel.addEventListener('mousedown', tempToggler);
   };
+
+  const handleSearchBtnClick = (getWeather) => {
+    if (!citiesInput.dataset.search) {
+      alert('Please enter city info');
+      return;
+    }
+    getWeather(citiesInput.dataset.search);
+    citiesInput.removeAttribute('data-search');
+    citiesInput.value = '';
+    citiesInput.setAttribute('disabled', true);
+    countriesInput.removeAttribute('data-code');
+    countriesInput.value = '';
+    cityInputDiv.classList.remove('show-input');
+  }
 
 
   return {
@@ -154,5 +183,5 @@ const DOMController = () => {
 
 export {
   DOMController as
-  default,
+    default,
 };
