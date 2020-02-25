@@ -16,7 +16,8 @@ dom.watch();
 
 const giphyExpression = async (data) => {
   const source = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  console.log(`https://api.giphy.com/v1/gifs/${weatherConditionGifs[`${data.weather[0].main}-${data.weather[0].icon[2]}`]}?api_key=FnaO3rXcDZNixxotdnLqLtYDrJYztxa1`)
+  // console.log(`https://api.giphy.com/v1/gifs/${weatherConditionGifs[`${data.weather[0].main}-${data.weather[0].icon[2]}`]}?api_key=FnaO3rXcDZNixxotdnLqLtYDrJYztxa1`)
+  //console.log(data)
   fetch(`https://api.giphy.com/v1/gifs/${weatherConditionGifs[`${data.weather[0].main}-${data.weather[0].icon[2]}`]}?api_key=FnaO3rXcDZNixxotdnLqLtYDrJYztxa1`)
     .then((response) => response.json())
     .then((response) => {
@@ -24,7 +25,7 @@ const giphyExpression = async (data) => {
       const weatherData = [
         {
           unity: '°F',
-          value: Math.round((data.main.temp - 273.15) * (5 / 9) + 32),
+          value: Math.round((data.main.temp - 273.15) * (9 / 5)) + 32,
           className: 'temperature'
         },
         {
