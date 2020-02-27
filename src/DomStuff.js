@@ -28,48 +28,33 @@ const DOMController = () => {
     }
   };
 
-  const fetchingError = (err) => {
-    display.querySelector('img').remove();
-    backgroundImg.style['background-image'] = 'none';
+  const fetchingError = (err, image) => {
+    cityName.innerText = `Unavailable City info`;
+    infoPanel.innerHTML = '';
+    display.classList.remove('show-weather');
+    setTimeout(() => {
+      display.classList.add('show-weather');
+    }, 1000);
     conversionPanel.classList.add('hide');
-    infoPanel.innerHTML = `<span style="color: red;">${err}</span>`;
+    backgroundImg.style['background-image'] = `url(${image})`;
   };
 
   const setWeatherLooks = (url, giphy, info, card) => {
     const displayDiv = url.map((link, ind) => {
       let skyImage = `<img src="${link}" />`;
-      let theData = `<span class="${info[ind].className}">${info[ind].value} ${info[ind].unity}</span>`;
+      let theData = `<span class="${info[ind].className}">${info[ind].value}${info[ind].unity}</span>`;
       return `<div class="list">${skyImage}${theData}</div>`;
     }).join('');
-    /*    const skyImage = new Image();
-        skyImage.src = url;
-        const temDiv = `<div class="list">${skyImage}</div>`;
-    
-        /*    if (document.querySelector('img')) {
-            display.removeChild(document.querySelector('img'));
-          }*/
-    //display.insertBefore(skyImage, document.querySelector('.info'));
     cityName.innerText = `${card.name}, ${card.country}`;
     infoPanel.innerHTML = displayDiv;
     display.classList.remove('show-weather');
     setTimeout(() => {
       display.classList.add('show-weather');
     }, 1000);
+    conversionPanel.classList.remove('hide');
     conversionSlider.classList.add('right');
     conversionCheckbox.checked = true;
-    //infoPanel.insertAdjacentElement('afterbegin', temDiv);
     backgroundImg.style['background-image'] = `url(${giphy})`;
-    /*let temp = parseFloat(info[0].value);
-    if (conversionCheckbox.checked) {
-      temp = Math.round((temp - 273.15) * (5 / 9) + 32);
-      info[1] = `<span class="temp">${temp} °F</span>`;
-      infoPanel.innerHTML = `${info.join(', ')}`;
-    } else {
-      temp = Math.round(temp - 273.15);
-      info[1] = `<span class="temp">${temp} °C</span>`;
-      infoPanel.innerHTML = `${info.join(', ')}`;
-    }
-    conversionPanel.classList.remove('hide');*/
   };
 
   const handleCountryInput = async (nations) => {
@@ -103,14 +88,6 @@ const DOMController = () => {
         }, 1000)
       });
     });
-
-    /*if (nations) {
-      citiesInput.removeAttribute('disabled');
-      cityInputDiv.classList.add('show-input');
-    } else {
-      citiesInput.setAttribute('disabled', true);
-      cityInputDiv.classList.remove('show-input');
-    }*/
   };
 
   const handleCityInput = async (cities) => {
@@ -150,11 +127,8 @@ const DOMController = () => {
       listOfCities = cities.filter((city) => city[1] === countriesInput.dataset.code);
     });
     countriesInput.addEventListener('input', () => handleCountryInput(nations));
-    //countriesInput.addEventListener('change', () => handleCountryInput(nations));
     citiesInput.addEventListener('input', () => handleCityInput(listOfCities));
-    //citiesInput.addEventListener('change', () => handleCityInput(listOfCities));
     searchBtn.addEventListener('mousedown', () => handleSearchBtnClick(getWeather))
-    //searchBtn.onclick = handleSearchBtnClick;
     conversionCheckbox.checked = false;
     conversionPanel.addEventListener('mousedown', tempToggler);
   };

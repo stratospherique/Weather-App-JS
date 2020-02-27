@@ -13,7 +13,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      favicon: './src/css/icon.ico',
+      template: './src/index.html',
     })
   ],
   output: {

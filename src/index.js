@@ -10,6 +10,7 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Humidity from './css/humidity.png';
 import Pressure from './css/pressure.png';
+import trouble from './css/error.svg'
 
 library.add(faSearch);
 dom.watch();
@@ -52,10 +53,10 @@ const giphyExpression = async (data) => {
 const getWeather = async (cityID) => {
   await ApiFetcher.weatherCondition(cityID).then((data) => {
     giphyExpression(data).catch((err) => {
-      DOMController().fetchingError('Unavailabe city info &#128148');
+      DOMController().fetchingError('Unavailabe city info &#128148', trouble);
     });
   }).catch((err) => {
-    DOMController().fetchingError(err);
+    DOMController().fetchingError(err, trouble);
   });
 };
 
