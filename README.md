@@ -7,10 +7,12 @@
 
 The app interrogates the user for the exact city that she/he want to know its current weather conditions. Subsequently, it gathers weather related info (e.g. temperature, pressure and humidity) from reliable sources (i.e. OpenWeatherMap) and adjust its looks accordingly.
 
-#### Web view
-![](web.png)
-#### Mobile view
-![](mobile.png)
+<div style="text-align: center;">
+  <h2 style="color: pink;">Web View</h2>
+  <img src="./web.png" alt="webview"/>
+  <h2 style="color: pink;">Mobile View</h2>
+  <img src="./mobile.png" alt="mobileview"/>
+</div>
 
 ## Technologies used
 

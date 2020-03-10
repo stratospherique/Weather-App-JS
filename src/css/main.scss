@@ -166,7 +166,8 @@ main {
     position: absolute;
     top: 3%;
     right: 5%;
-
+    cursor: pointer;
+    
     & input {
       display: none;
     }
@@ -188,6 +189,7 @@ main {
       font-weight: 900;
       z-index: 100;
       top: 4%;
+      user-select: none;
     }
 
     .f {
