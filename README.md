@@ -48,15 +48,15 @@ npm start
 npm test
 ```
 
-## Meta
+## Author
 
-Ahmed Mahfoudh – [@AhmedMahfoudh8](https://twitter.com/AhmedMahfoudh8) – ahmed.mahfoudh1991@gmail.com
+👨 Ahmed Mahfoudh
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+- [Linkedin](https://www.linkedin.com/in/ahmed-mahfoudh-6414b6121/)
+- [Twitter](https://twitter.com/AhmedMahfoudh8)
+- [Email](mailto:ahmed.mahfoudh1991@gmail.com?subject=Website%20Inquiry)
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork it 
 2. Create your feature branch 
@@ -64,10 +64,7 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 4. Push to the branch 
 5. Create a new Pull Request
 
-<!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+## Show your support
+
+Give a ⭐️ if you like this project!
+
