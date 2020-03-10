@@ -27,9 +27,11 @@ const weatherConditionGifs = {
   'Clear-d': 'Te7h0uqGNo0CY',
   'Clouds-n': 'QkwvkJc83E12g',
   'Clouds-d': 'Cn46Wi1Fvh11S',
+  'Mist-d': '11uphU5Zfgk1vW',
+  'Mist-n': 'yhZr5Wx7CBFbq',
 };
 
 export {
   weatherConditionGifs as
-  default,
+    default,
 };

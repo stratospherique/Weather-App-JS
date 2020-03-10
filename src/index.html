@@ -15,26 +15,26 @@
     <div class="container">
 
       <div novalidate id="search-form">
-        <div>
-          <div class="select">
-            <input type="text" placeholder="Country Name">
-            <ul id="countries-list"></ul>
-          </div>
-          <div class="select">
-            <input type="text" placeholder="City Name" disabled>
-            <ul id="cities-list"></ul>
-          </div>
+
+        <div class="select one">
+          <input type="text" placeholder="Country Name">
+          <ul id="countries-list"></ul>
         </div>
-        <button class="started">&#128270</button>
+        <div class="select two">
+          <input type="text" placeholder="City Name" />
+          <div class="started"><i class="fas fa-search"></i></div>
+          <ul id="cities-list"></ul>
+        </div>
       </div>
 
       <div class="weather">
-        <div class="conversion hide"><span class="f">°F</span><label class="slider"></label><span class="c">°C</span><input
-            type="checkbox" name="system" id="system"></div>
+        <div class="conversion"><span class="f">°F</span><label class="slider"></label><span class="c">°C</span>
+          <input type="checkbox" name="system" id="system">
+        </div>
+        <h1 class="city_name"></h1>
         <div class="info">
 
         </div>
-
       </div>
     </div>
   </main>
