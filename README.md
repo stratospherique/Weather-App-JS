@@ -7,12 +7,14 @@
 
 The app interrogates the user for the exact city that she/he want to know its current weather conditions. Subsequently, it gathers weather related info (e.g. temperature, pressure and humidity) from reliable sources (i.e. OpenWeatherMap) and adjust its looks accordingly.
 
-<div style="text-align: center;">
-  <h2 style="color: pink;">Web View</h2>
-  <img src="./web.png" alt="webview"/>
-  <h2 style="color: pink;">Mobile View</h2>
+  <h2 align="center">Web View</h2>
+  <p align="center">
+  <img src="./web.png" style="text-align: center;" alt="webview"/>
+  </p>
+  <h2 align="center">Mobile View</h2>
+  <p align="center">
   <img src="./mobile.png" alt="mobileview"/>
-</div>
+  </p>
 
 ## Technologies used
 
@@ -26,7 +28,7 @@ In this app we used the following technologies:
   - [link to the assignment](https://www.theodinproject.com/courses/javascript/lessons/weather-app)
 
 ### Live preview
-- Check out a live version of the page [live](https://rawcdn.githack.com/stratospherique/Weather-App-JS/ef39618fc7a24fe22c79bb20a182d1814fc264c8/index.html)
+- Check out a live version of the page [live](https://stratospherique.github.io/Weather-App-JS/)
 
 
 ## Installation
