@@ -1,9 +1,8 @@
+![beta development](https://img.shields.io/badge/beta-development-green?style=flat-square)
+![Hireable](https://cdn.rawgit.com/hiendv/hireable/master/styles/default/yes.svg)
+
 # Weather App
 > Weather app is a web app that enables the user to get weather related info about any city in the world.
-
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
 
 The app interrogates the user for the exact city that she/he want to know its current weather conditions. Subsequently, it gathers weather related info (e.g. temperature, pressure and humidity) from reliable sources (i.e. OpenWeatherMap) and adjust its looks accordingly.
 
